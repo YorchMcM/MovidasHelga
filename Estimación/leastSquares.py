@@ -2,10 +2,12 @@
 import numpy as np
 from numpy import pi as PI
 from matplotlib import use, interactive
-import matplotlib.pyplot as plt
-
 interactive(True)
 use('TkAgg')
+import matplotlib.pyplot as plt
+
+
+
 
 TWOPI = 2.0*PI
 
@@ -28,12 +30,12 @@ q = 2.61
 N_params = 6
 
 
-def x(t):
-    return x0 + vx0*t + 0.5*q/m*E*t**2.0
+def x(t: float|np.ndarray, p: np.ndarray = np.array([x0,y0,vx0,vy0,g,E])):
+        return p[0] + p[2]*t + 0.5*q/m*p[5]*t**2.0
 
 
-def y(t):
-    return y0 + vy0*t - 0.5*g*t**2
+def y(t: float|np.ndarray, p: np.ndarray = np.array([x0,y0,vx0,vy0,g,E])):
+        return p[1] + p[3]*t - 0.5*p[4]*t**2.0
 
 
 t_min = 0.0
@@ -126,11 +128,20 @@ plt.title(r'Trayectoria')
 plt.figure()
 plt.plot(t_obs, residuos_x, label = r'Residuo $x$')
 plt.plot(t_obs, residuos_y, label = r'Residuo $y$')
-plt.plot(t_obs, noise_x, label = r'Ruido $x$')
-plt.plot(t_obs, noise_y, label = r'Ruido $y$')
+# plt.plot(t_obs, noise_x, label = r'Ruido $x$')
+# plt.plot(t_obs, noise_y, label = r'Ruido $y$')
 plt.grid()
 plt.legend()
 plt.xlabel(r'Tiempo [s]')
 plt.ylabel(r'Residuo [m]')
+
+# Trayectoria (mala) reconstruida
+plt.figure()
+plt.plot(x(t), y(t), label = r'Real')
+plt.plot(x(t,p_noise), y(t,p_noise), label = r'Reconstruida')
+plt.grid()
+plt.legend()
+plt.xlabel(r'$x$ [m]')
+plt.ylabel(r'$y$ [m]')
 
 # plt.show()

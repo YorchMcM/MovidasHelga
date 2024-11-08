@@ -144,4 +144,32 @@ plt.legend()
 plt.xlabel(r'$x$ [m]')
 plt.ylabel(r'$y$ [m]')
 
+R = 14
+x = np.array([13,17,-1,-10])
+y = np.array([7,-3,15,-11])
+plt.figure()
+# Fondo gris
+plt.axhspan(-R, R, facecolor='grey', xmin = 0.5)
+# Parche blanco
+temp = np.arange(0,91,1)
+plt.fill_between(R*np.cos(np.radians(temp)),-R*np.sin(np.radians(temp)),14*np.sin(np.radians(temp)), color = 'white')
+# Líneas eclipse
+plt.axhline(R, xmin = 0.5, c = 'k')
+plt.axhline(-R, xmin = 0.5, c = 'k')
+# Círculo planeta
+temp = np.arange(0,360,1)
+plt.plot(R*np.cos(np.radians(temp)), R*np.sin(np.radians(temp)), c = 'b')
+# Puntos
+plt.scatter(x,y, c = 'r')
+# Opciones plot
+plt.axis('equal')
+plt.grid()
+
+t = np.arange(0.0, 10.0, 0.1)
+x = -10 + 3.0*t
+y = 51 - 42*t + 9.0*t**2.0
+plt.figure()
+plt.plot(x,y)
+plt.grid()
+
 # plt.show()

@@ -6,9 +6,6 @@ interactive(True)
 use('TkAgg')
 import matplotlib.pyplot as plt
 
-
-
-
 TWOPI = 2.0*PI
 
 plt.rc('axes', titlesize = 18)
